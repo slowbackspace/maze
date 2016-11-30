@@ -15,15 +15,15 @@ class Result(object):
 
         coords_list = []
         direction = self.directions[row, column]
-        while(direction != "X"):
+        while(direction != b"X"):
             coords_list.append((row, column))
-            if direction == ">":
+            if direction == b">":
                 column += 1
-            elif direction == "<":
+            elif direction == b"<":
                 column -=1
-            elif direction == "v":
+            elif direction == b"v":
                 row +=1
-            elif direction == "^":
+            elif direction == b"^":
                 row -=1
             else:
                 raise Exception("woah should not happen")
@@ -36,7 +36,7 @@ def make_graph(array):
     cols = array.shape[1]
 
     graph = defaultdict(list)
-
+    
     for row in range(rows):
         for col in range(cols):
             if array[row][col] < 0:
@@ -47,8 +47,9 @@ def make_graph(array):
             if col < cols - 1 and array[row][col + 1] >= 0:
                 graph[(row, col)].append(("<", (row, col + 1)))
                 graph[(row, col + 1)].append((">", (row, col)))
+    print(graph)
     return graph
-
+    
 
 def bfs_solver(maze, start):
     queue = deque([("", start, 0)])
@@ -80,7 +81,7 @@ def bfs_solver(maze, start):
     for point in distances:
         distance_matrix[point[0], point[1]] = distances[point][0]
 
-    directionsMatrix = numpy.empty(maze.shape, dtype=object)
+    directionsMatrix = numpy.empty(maze.shape, dtype=("a", 1))
     # fill with "walls"
     directionsMatrix.fill("#")
 
@@ -109,17 +110,16 @@ def analyze(array):
 
     distanceMatrix, directionsMatrix, is_reachable = bfs_solver(array, start)
     result = Result(distanceMatrix, directionsMatrix, is_reachable)
-    #print(distanceMatrix)
-    #print(directionsMatrix)
+    print(distanceMatrix)
+    print(directionsMatrix)
     #print(result.path(0, 0))
     return result
 
 if __name__ == '__main__':
-    test_array = numpy.array([
-        [0, -1, 0, 1],
-        [0, 0, 0, -1],
-        [0, -1, 0, -1],
-        [0, 0, -1, -1],
-        [-1, -1, 0, 0]
-    ])
-    analyze(test_array)
+    test_array = numpy.array([[ 1],
+       [ 0],
+       [-1],
+       [-1],
+       [ 0]], dtype=int)
+    r = analyze(test_array)
+    print(r.is_reachable)
