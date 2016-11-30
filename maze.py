@@ -35,18 +35,17 @@ def make_graph(array):
     rows = array.shape[0]
     cols = array.shape[1]
 
-    graph = defaultdict(list)
-    
-    for row in range(rows):
-        for col in range(cols):
-            if array[row][col] < 0:
-                continue  # wall
-            if row < rows - 1 and array[row + 1][col] >= 0:
-                graph[(row, col)].append(("^", (row + 1, col)))
-                graph[(row + 1, col)].append(("v", (row, col)))
-            if col < cols - 1 and array[row][col + 1] >= 0:
-                graph[(row, col)].append(("<", (row, col + 1)))
-                graph[(row, col + 1)].append((">", (row, col)))
+    graph = {(i, j): [] for j in range(cols) for i in range(rows) if array[i,j] >= 0}
+
+    for row, col in graph.keys():
+        if array[row][col] < 0:
+            continue  # wall
+        if row < rows - 1 and array[row + 1][col] >= 0:
+            graph[(row, col)].append(("^", (row + 1, col)))
+            graph[(row + 1, col)].append(("v", (row, col)))
+        if col < cols - 1 and array[row][col + 1] >= 0:
+            graph[(row, col)].append(("<", (row, col + 1)))
+            graph[(row, col + 1)].append((">", (row, col)))
     print(graph)
     return graph
     
