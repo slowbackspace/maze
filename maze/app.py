@@ -1,7 +1,7 @@
 import os
 from PyQt5 import QtWidgets, uic, QtGui, QtCore, QtSvg
 import numpy
-from maze import analyze
+from .maze import analyze
 from pprint import pprint
 import copy
 CELL_SIZE = 32
@@ -11,7 +11,7 @@ VALUE_ROLE = QtCore.Qt.UserRole
 XYZ_ROLE = QtCore.Qt.DisplayRole
 
 def get_path_line(filename):
-    return QtSvg.QSvgRenderer(os.path.join("pics", "lines", filename + ".svg"))
+    return QtSvg.QSvgRenderer(os.path.join(os.path.dirname(__file__), "pics", "lines", filename + ".svg"))
 
 def get_path_arrow(arrow):
     filenames = {
@@ -22,15 +22,15 @@ def get_path_arrow(arrow):
     }
     filename = filenames.get(arrow)
     if filename:
-        return QtSvg.QSvgRenderer(os.path.join("pics", "arrows", filename))
+        return QtSvg.QSvgRenderer(os.path.join(os.path.dirname(__file__), "pics", "arrows", filename))
     else:
         return None
 
 def get_tile(filename):
-    return QtSvg.QSvgRenderer(os.path.join("pics", filename))
+    return QtSvg.QSvgRenderer(os.path.join(os.path.dirname(__file__), "pics", filename))
 
 def get_asset(*path):
-    return QtSvg.QSvgRenderer(os.path.join(*path))
+    return QtSvg.QSvgRenderer(os.path.join(os.path.dirname(__file__), *path))
 
 def pixels_to_logical(x, y):
     """return row, column"""
@@ -222,7 +222,7 @@ class Maze():
         self.app = QtWidgets.QApplication([])
         self.window = QtWidgets.QMainWindow()
 
-        with open(os.path.join("ui", "mainwindow.ui")) as f:
+        with open(os.path.join(os.path.dirname(__file__), "ui", "mainwindow.ui")) as f:
             uic.loadUi(f, self.window)
 
         array = numpy.zeros((15, 20))
@@ -265,7 +265,7 @@ class Maze():
 
     def new_dialog(self):
         dialog = QtWidgets.QDialog(self.window)
-        with open(os.path.join("ui", "newmaze.ui")) as f:
+        with open(os.path.join(os.path.dirname(__file__), "ui", "newmaze.ui")) as f:
             uic.loadUi(f, dialog)
         result = dialog.exec()
 
@@ -320,13 +320,13 @@ class Maze():
 
     def about(self):
         dialog = QtWidgets.QDialog(self.window)
-        with open(os.path.join("ui", "about.ui")) as f:
+        with open(os.path.dirname(__file__), os.path.join("ui", "about.ui")) as f:
             uic.loadUi(f, dialog)
         result = dialog.exec()
 
     def add_item_to_pallete(self, name, icon, role):
         item = QtWidgets.QListWidgetItem(name)
-        icon = QtGui.QIcon(os.path.join("pics", icon))
+        icon = QtGui.QIcon(os.path.join(os.path.dirname(__file__), "pics", icon))
         item.setData(QtCore.Qt.UserRole, role)
         item.setIcon(icon)
         self.palette.addItem(item)
@@ -349,4 +349,5 @@ def main():
     maze = Maze()
     maze.run()
 
-main()
+if __name__ == '__main__':
+    main()
