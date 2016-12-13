@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>386</width>
-    <height>192</height>
+    <height>232</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,13 +19,13 @@
      <property name="formAlignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
      </property>
-     <item row="5" column="0">
-      <widget class="QLabel" name="label_2">
+     <item row="3" column="0">
+      <widget class="QLabel" name="label">
        <property name="text">
-        <string>Height</string>
+        <string>Width</string>
        </property>
        <property name="buddy">
-        <cstring>heightBox</cstring>
+        <cstring>widthBox</cstring>
        </property>
       </widget>
      </item>
@@ -37,25 +37,43 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="baseSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>1000</number>
+       </property>
        <property name="value">
         <number>3</number>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Height</string>
+       </property>
+       <property name="buddy">
+        <cstring>heightBox</cstring>
        </property>
       </widget>
      </item>
      <item row="5" column="1">
       <widget class="QSpinBox" name="heightBox">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>1000</number>
+       </property>
        <property name="value">
         <number>3</number>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Width</string>
-       </property>
-       <property name="buddy">
-        <cstring>widthBox</cstring>
        </property>
       </widget>
      </item>
