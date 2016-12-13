@@ -41,7 +41,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>GUI written in PyQt for MI-PYT course on FIT ČVUT in Prague.</string>
+    <string>GUI written in PyQt for MI-PYT course at FIT CTU in Prague.</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
