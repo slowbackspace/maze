@@ -46,7 +46,7 @@ def make_graph(array):
         if col < cols - 1 and array[row][col + 1] >= 0:
             graph[(row, col)].append(("<", (row, col + 1)))
             graph[(row, col + 1)].append((">", (row, col)))
-    print(graph)
+    # print(graph)
     return graph
     
 
@@ -109,9 +109,9 @@ def analyze(array):
 
     distanceMatrix, directionsMatrix, is_reachable = bfs_solver(array, start)
     result = Result(distanceMatrix, directionsMatrix, is_reachable)
-    print(distanceMatrix)
-    print(directionsMatrix)
-    #print(result.path(0, 0))
+    # print(distanceMatrix)
+    # print(directionsMatrix)
+    # print(result.path(0, 0))
     return result
 
 if __name__ == '__main__':
@@ -121,4 +121,4 @@ if __name__ == '__main__':
        [-1],
        [ 0]], dtype=int)
     r = analyze(test_array)
-    print(r.is_reachable)
+    # print(r.is_reachable)
